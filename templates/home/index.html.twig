@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Mini Projet{% endblock %}
+
+{% block body %}
+    <h1>Derniers posts</h1>
+
+    {% if posts is empty %}
+        <p>Aucun post pour le moment. <a href="{{ path('post_new') }}">Créez-en un</a>.</p>
+    {% else %}
+        <ul>
+            {% for post in posts %}
+                <li>
+                    <h3>{{ post.title }}</h3>
+                    <small>{{ post.createdAt|date('d/m/Y H:i') }}</small>
+                    <div>{{ post.content|nl2br }}</div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+{% endblock %}
+
