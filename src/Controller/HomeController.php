@@ -19,7 +19,9 @@ class HomeController extends AbstractController
     #[Route('/', name: 'home', methods: ['GET'])]
     public function index(): Response
     {
-        $posts = $this->postService->getAllPosts();
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+        $posts = $this->postService->getPostsByAuthor($user);
 
         return $this->render('home/index.html.twig', [
             'posts' => $posts,
