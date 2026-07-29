@@ -1,6 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="120" height="40" viewBox="0 0 120 40">
-  <rect width="120" height="40" fill="#4f46e5" rx="6"></rect>
-  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="14">Symphony</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6366f1"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+  </defs>
+  <rect width="36" height="36" rx="10" fill="url(#g)"/>
+  <path d="M10 24V12h3.2l3.8 7.2L20.8 12H24v12h-2.6v-7.4L17.2 24h-1.4l-4.2-7.4V24H10z" fill="#fff"/>
 </svg>
-

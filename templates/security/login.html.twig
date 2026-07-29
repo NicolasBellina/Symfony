@@ -1,26 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion{% endblock %}
+{% block title %}Connexion — Symphony{% endblock %}
 
 {% block body %}
-    <h1>Connexion</h1>
+    <div class="card card-auth">
+        <div class="page-header page-header--center">
+            <h1>Bon retour !</h1>
+            <p>Connectez-vous pour accéder au mur de posts.</p>
+        </div>
 
-    {% if error %}
-        <div class="error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+        {% if error %}
+            <div class="alert-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
 
-    <form action="{{ path('app_login') }}" method="post">
-        <label for="username">Email</label>
-        <input type="email" id="username" name="_username" value="{{ last_username }}" required autocomplete="email">
+        <form class="auth-form" action="{{ path('app_login') }}" method="post">
+            <label for="username">Email</label>
+            <input type="email" id="username" name="_username" value="{{ last_username }}" required autocomplete="email" placeholder="vous@exemple.com">
 
-        <label for="password">Mot de passe</label>
-        <input type="password" id="password" name="_password" required autocomplete="current-password">
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="_password" required autocomplete="current-password" placeholder="••••••••">
 
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-        <button type="submit">Se connecter</button>
-    </form>
+            <button type="submit">Se connecter</button>
+        </form>
 
-    <p>Pas encore de compte ? <a href="{{ path('app_register') }}">Créer un compte</a></p>
+        <p class="auth-footer">
+            Pas encore de compte ? <a href="{{ path('app_register') }}">Créer un compte</a>
+        </p>
+    </div>
 {% endblock %}
-

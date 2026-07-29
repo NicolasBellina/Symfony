@@ -1,15 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Créer un post{% endblock %}
+{% block title %}Créer un post — Symphony{% endblock %}
 
 {% block body %}
-    <h1>Créer un post</h1>
+    <div class="page-header">
+        <h1>Créer un post</h1>
+        <p>Partagez un titre et un message avec la communauté.</p>
+    </div>
 
-    {{ form_start(form) }}
-        {{ form_row(form.title) }}
-        {{ form_row(form.content) }}
-        {{ form_row(form.save) }}
-    {{ form_end(form) }}
-
+    <div class="card card-form">
+        {{ form_start(form, { attr: { class: 'card-form' } }) }}
+            {{ form_row(form.title) }}
+            {{ form_row(form.content) }}
+            {{ form_row(form.save) }}
+        {{ form_end(form) }}
+    </div>
 {% endblock %}
-

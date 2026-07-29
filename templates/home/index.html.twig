@@ -1,23 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil - Mini Projet{% endblock %}
+{% block title %}Accueil — Symphony{% endblock %}
 
 {% block body %}
-    <h1>Derniers posts</h1>
+    <div class="page-header">
+        <h1>Mur de posts</h1>
+        <p>Découvrez les dernières publications de la communauté.</p>
+    </div>
+
+    <div class="page-actions">
+        <span></span>
+        <a href="{{ path('post_new') }}" class="btn btn-primary">+ Nouveau post</a>
+    </div>
 
     {% if posts is empty %}
-        <p>Aucun post pour le moment. <a href="{{ path('post_new') }}">Créez-en un</a>.</p>
+        <div class="empty-state">
+            <div class="empty-state__icon">📝</div>
+            <h2>Aucun post pour le moment</h2>
+            <p>Soyez le premier à partager quelque chose avec la communauté !</p>
+            <a href="{{ path('post_new') }}" class="btn btn-primary">Créer un post</a>
+        </div>
     {% else %}
-        <ul>
+        <div class="posts-grid">
             {% for post in posts %}
-                <li>
-                    <h3>{{ post.title }}</h3>
-                    <small>{{ post.createdAt|date('d/m/Y H:i') }}</small>
-                    <div>{{ post.content|nl2br }}</div>
-                </li>
+                <article class="post-card">
+                    <div class="post-card__header">
+                        <h2 class="post-card__title">{{ post.title }}</h2>
+                        <time class="post-card__date">{{ post.createdAt|date('d/m/Y · H:i') }}</time>
+                    </div>
+                    <p class="post-card__content">{{ post.content|nl2br }}</p>
+                </article>
             {% endfor %}
-        </ul>
+        </div>
     {% endif %}
-
 {% endblock %}
-

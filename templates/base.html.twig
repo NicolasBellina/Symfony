@@ -1,42 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}Symphony Mini-Projet{% endblock %}</title>
+        <title>{% block title %}Symphony{% endblock %}</title>
         <link rel="stylesheet" href="/assets/css/app.css">
     </head>
     <body>
-        <header>
-            <img src="/assets/images/logo.svg" alt="Logo" height="48">
-            <nav>
-                <a href="{{ path('home') }}">Accueil</a>
-                <a href="{{ path('post_new') }}">Créer un post</a>
-                {% if app.user %}
-                    <span>Connecté: {{ app.user.userIdentifier }}</span>
-                    <a href="{{ path('app_logout') }}">Déconnexion</a>
-                {% else %}
-                    <a href="{{ path('app_login') }}">Connexion</a>
-                    <a href="{{ path('app_register') }}">Inscription</a>
-                {% endif %}
-            </nav>
+        {% set currentRoute = app.request.attributes.get('_route') %}
+
+        <header class="site-header">
+            <div class="header-inner">
+                <a href="{{ path('home') }}" class="brand">
+                    <img src="/assets/images/logo.svg" alt="Symphony">
+                    Symphony
+                </a>
+
+                <button class="nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+
+                <nav class="site-nav">
+                    {% if app.user %}
+                        <a href="{{ path('home') }}" class="{{ currentRoute == 'home' ? 'active' : '' }}">Accueil</a>
+                        <a href="{{ path('post_new') }}" class="{{ currentRoute == 'post_new' ? 'active' : '' }}">Créer un post</a>
+                        <span class="nav-divider"></span>
+                        <span class="user-badge" title="{{ app.user.userIdentifier }}">{{ app.user.userIdentifier }}</span>
+                        <a href="{{ path('app_logout') }}" class="btn btn-ghost">Déconnexion</a>
+                    {% else %}
+                        <a href="{{ path('app_login') }}" class="{{ currentRoute == 'app_login' ? 'active' : '' }}">Connexion</a>
+                        <a href="{{ path('app_register') }}" class="btn btn-primary">Inscription</a>
+                    {% endif %}
+                </nav>
+            </div>
         </header>
 
         <main>
-            {% for label, messages in app.flashes %}
-                {% for message in messages %}
-                    <div class="flash {{ label }}">{{ message }}</div>
-                {% endfor %}
-            {% endfor %}
+            {% set flashes = app.flashes %}
+            {% if flashes|length > 0 %}
+                <div class="flash-container">
+                    {% for label, messages in flashes %}
+                        {% for message in messages %}
+                            <div class="flash {{ label }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            {% endif %}
 
             {% block body %}{% endblock %}
         </main>
 
-        <footer>
-            <p>Projet Symfony - Examen Final</p>
+        <footer class="site-footer">
+            <p>Symphony — Mini-projet Symfony · ESGI 4</p>
         </footer>
 
         <script src="/assets/js/app.js"></script>
     </body>
 </html>
-
